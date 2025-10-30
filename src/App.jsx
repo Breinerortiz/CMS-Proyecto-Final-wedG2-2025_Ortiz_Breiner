@@ -19,7 +19,8 @@ function App() {
         <Route path="/news" element={<News />} />
 
         {/* Página de inicio de sesión */}
-        <Route path="/login" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
+
 
         {/* Panel administrativo */}
         <Route path="/admin" element={<Admin />} />
