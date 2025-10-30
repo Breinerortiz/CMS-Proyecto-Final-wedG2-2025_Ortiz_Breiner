@@ -25,7 +25,7 @@ function App() {
          <Route path="/news" element={<News />} />
 
          {/* Página de inicio de sesión */}
-         <Route path="/login" element={<LoginPage />} />
+         <Route path="/Login" element={<LoginPage />} />
 
          {/* Panel administrativo (solo para usuarios autenticados) */}
          <Route
