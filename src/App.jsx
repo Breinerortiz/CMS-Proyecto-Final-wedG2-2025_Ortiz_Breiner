@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
-import Inicio from './Components/Inicio/inicio';  
+ import Main from './Components/main/Main';
 import News from './Components/News/News';
 import Admin from './Components/Admin/Admin';
 import Login from './Pages/LoginPages/Loginpage';
@@ -19,7 +19,7 @@ function App() {
 
        <Routes>
          {/* Página pública */}
-         <Route path="/" element={<Inicio />} />
+         <Route path="/" element={<Main />} />
 
          {/* Noticias públicas */}
          <Route path="/news" element={<News />} />
