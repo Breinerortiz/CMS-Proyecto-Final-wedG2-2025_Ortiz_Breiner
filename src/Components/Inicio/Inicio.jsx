@@ -1,8 +1,8 @@
 import { Container, Typography, Box, Button } from "@mui/material";
-import "./inicio.css"; 
+import "./Inicio.css"; 
 
 
-const inicio = () => {
+const Inicio = () => {
   return (
     <>
  
@@ -46,4 +46,4 @@ const inicio = () => {
   );
 };
 
-export default inicio;
+export default Inicio;
