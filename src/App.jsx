@@ -4,7 +4,7 @@ import Footer from './Components/Footer/Footer';
  import Main from './Components/Main/Main';
 import News from './Components/News/News';
 import Admin from './Components/Admin/Admin';
-import Login from './Pages/LoginPages/Loginpage';
+import LoginPage from './Pages/LoginPages/LoginPages';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 
@@ -25,7 +25,7 @@ function App() {
          <Route path="/news" element={<News />} />
 
          {/* Página de inicio de sesión */}
-         <Route path="/login" element={<Login />} />
+         <Route path="/login" element={<LoginPage />} />
 
          {/* Panel administrativo (solo para usuarios autenticados) */}
          <Route

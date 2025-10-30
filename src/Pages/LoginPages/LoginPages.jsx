@@ -14,7 +14,7 @@ import {
   Alert,
   MenuItem,
 } from "@mui/material";
-import "./loginPages.css";
+import "./LoginPages.css";
 
 const LoginPage = () => {
   // Estado que controla si estamos en modo Login o Registro
