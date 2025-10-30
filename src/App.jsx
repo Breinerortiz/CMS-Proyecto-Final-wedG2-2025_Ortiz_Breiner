@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
-import Inicio from './Components/Inicio/inicio';
+import Inicio from './Components/Inicio/Inicio';
 import News from './Components/News/News';
 import Admin from './Components/Admin/Admin';
 import Login from './Pages/LoginPages/Loginpage';
