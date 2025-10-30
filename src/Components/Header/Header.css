@@ -1,0 +1,64 @@
+/* 🎨 Estilos para el Header */
+
+.header-container {
+  background-color: #1976d2 !important;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+}
+
+.header-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-logo {
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.header-logo:hover {
+  transform: scale(1.08);
+}
+
+.header-title {
+  font-weight: bold !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+.header-button {
+  font-weight: bold !important;
+  background-color: #ffca28 !important;
+  color: #0d47a1 !important;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.header-button:hover {
+  background-color: #ffd740 !important;
+  transform: scale(1.05);
+}
+
+/* 📱 Responsivo */
+@media (max-width: 768px) {
+  .header-toolbar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .header-logo {
+    width: 50px;
+  }
+
+  .header-title {
+    font-size: 1.3rem !important;
+  }
+}

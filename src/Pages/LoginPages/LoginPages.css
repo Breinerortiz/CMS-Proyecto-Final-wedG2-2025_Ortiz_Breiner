@@ -1,0 +1,86 @@
+/* 🎨 Estilos para la pantalla de Login */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  padding: 20px;
+}
+
+.login-box {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.login-logo {
+  width: 80px;
+  margin-bottom: 15px;
+}
+
+.login-title {
+  color: #0d47a1 !important;
+  font-weight: bold !important;
+  margin-bottom: 20px !important;
+}
+
+.login-form {
+  margin-top: 10px;
+}
+
+.login-button {
+  margin-top: 15px !important;
+  font-weight: bold !important;
+  background-color: #1976d2 !important;
+  transition: all 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #1565c0 !important;
+  transform: scale(1.03);
+}
+
+.login-register {
+  margin-top: 15px;
+  color: #555;
+}
+
+.login-link {
+  color: #1976d2;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* ✨ Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsivo */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 25px;
+  }
+
+  .login-title {
+    font-size: 1.5rem !important;
+  }
+}
