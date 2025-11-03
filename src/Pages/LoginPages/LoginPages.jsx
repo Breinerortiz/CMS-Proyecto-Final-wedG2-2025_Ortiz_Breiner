@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../Firebase/ConfigFirebase";
 import { useNavigate } from "react-router-dom";
 import {
@@ -54,13 +54,34 @@ const LoginPage = () => {
       }
     } else {
       // 🔐 LOGIN
+      // 🔐 LOGIN
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        navigate("/admin");
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Buscar el rol del usuario en Firestore
+        const docRef = doc(db, "usuarios", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const rol = docSnap.data().rol;
+
+          // Redirigir según el rol
+          if (rol === "reportero") {
+            navigate("/reportero");
+          } else if (rol === "editor") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+        } else {
+          setError("No se encontró información del usuario.");
+        }
       } catch (err) {
         console.error(err);
         setError("Correo o contraseña incorrectos");
       }
+
     }
   };
 
