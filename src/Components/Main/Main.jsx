@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Container, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+
 import "./Main.css";
 
 const Main = () => {
@@ -99,8 +100,9 @@ const Main = () => {
           </motion.div>
         </motion.div>
       </Container>
+   
     </div>
-  );
+  )
 };
 
 export default Main;

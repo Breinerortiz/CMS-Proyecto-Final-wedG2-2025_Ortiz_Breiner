@@ -1,13 +1,16 @@
 /* 🎨 Estilos para el Footer */
 
-.footer-container {
-  background-color: #000000;
-  color: white;
+footer {
+  position: relative;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #00ff99;
   text-align: center;
-  padding: 20px 0;
-  margin-top: 60px;
-  box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  font-weight: bold;
+  border-top: 2px solid #00ff99;
 }
+
 
 .footer-text {
   font-size: 0.95rem;
