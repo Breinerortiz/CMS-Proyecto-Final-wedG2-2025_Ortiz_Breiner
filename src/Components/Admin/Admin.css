@@ -1,0 +1,115 @@
+/* ===================== */
+/* 🎨 ESTILO GENERAL ADMIN */
+/* ===================== */
+.admin-container {
+
+  min-height: 100vh;
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 🧾 Título */
+.admin-title {
+  text-align: center;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 2rem;
+  animation: slideDown 0.6s ease-out;
+}
+
+/* 📄 Tarjetas */
+.admin-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #00ffc8;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: fadeUp 0.5s ease-in-out;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* 🖼 Imagen */
+.admin-img {
+  width: 180px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* 🗂 Contenido */
+.admin-card-content {
+  flex: 1;
+}
+
+.admin-card-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #0d47a1;
+}
+
+.admin-card-sub {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.admin-status {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* 🎨 Colores por estado */
+.estado-Edición {
+  color: #ff9800;
+}
+
+.estado-Terminado {
+  color: #0288d1;
+}
+
+.estado-Publicado {
+  color: #2e7d32;
+}
+
+.estado-Desactivado {
+  color: #b71c1c;
+}
+
+/* ✨ Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

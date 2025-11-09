@@ -14,16 +14,15 @@ function App() {
       <Header />
 
       <Routes>
-        {/* Página pública */}
+
         <Route path="/" element={<Main />} />
 
-        {/* Noticias públicas */}
+
         <Route path="/news" element={<News />} />
 
-        {/* Página de inicio de sesión */}
+
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Panel del Reportero (protegido) */}
         <Route
           path="/reportero"
           element={
@@ -33,7 +32,7 @@ function App() {
           }
         />
 
-        {/* Panel del Editor/Admin (protegido) */}
+
         <Route
           path="/admin"
           element={
@@ -43,7 +42,7 @@ function App() {
           }
         />
 
-        {/* Página 404 */}
+       
         <Route
           path="*"
           element={

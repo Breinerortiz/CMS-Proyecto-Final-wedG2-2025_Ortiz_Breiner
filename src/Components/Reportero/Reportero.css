@@ -1,0 +1,134 @@
+/* 🎨 Estilos generales */
+.reportero-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Encabezado */
+.reportero-title {
+  text-align: center;
+  color: #1a237e;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Formulario */
+.reportero-form {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.reportero-form:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Botón */
+.btn-crear {
+  background: linear-gradient(90deg, #1a237e, #3949ab);
+  color: white !important;
+  transition: all 0.3s ease;
+}
+.btn-crear:hover {
+  background: linear-gradient(90deg, #3949ab, #1a237e);
+  transform: scale(1.05);
+}
+
+/* Tarjetas */
+.reportero-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.reportero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Imagen del input */
+input[type="file"] {
+  border: 1px dashed #9e9e9e;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+input[type="file"]:hover {
+  border-color: #3f51b5;
+  background-color: #f0f2ff;
+}
+/* ===================== */
+/* 🌀 ANIMACIÓN DE CARGA */
+/* ===================== */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.loader-spinner {
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #3f51b5;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+
+.loader-text {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #1a237e;
+  font-weight: 600;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
