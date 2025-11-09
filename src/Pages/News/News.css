@@ -179,11 +179,11 @@
   border-radius: 12px;
   padding: 1.5rem; /* más pequeño */
   width: 80%; /* reducimos el ancho */
-  max-width: 600px; /* antes 800px */
+  max-width: 500px; /* antes 800px */
   color: #e0ffe0;
   position: relative;
   overflow-y: auto;
-  max-height: 80vh; /* más pequeño */
+  max-height: 70vh; /* más pequeño */
   animation: fadeInModal 0.3s ease-out;
 }
 
