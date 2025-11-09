@@ -82,7 +82,6 @@ const Main = () => {
             comprometido con la veracidad, la independencia y la innovación periodística.
           </Typography>
 
-          {/* 🔹 Botones principales */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,4 +123,3 @@ const Main = () => {
 };
 
 export default Main;
-
