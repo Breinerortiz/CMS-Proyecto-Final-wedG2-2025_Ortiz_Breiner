@@ -394,7 +394,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 60px ; /* 🔹 Aumentamos el margen superior */
+  margin: 60px auto 50px; /* 🔹 Aumentamos el margen superior */
   animation: fadeIn 0.8s ease;
   transition: all 0.4s ease;
 }
