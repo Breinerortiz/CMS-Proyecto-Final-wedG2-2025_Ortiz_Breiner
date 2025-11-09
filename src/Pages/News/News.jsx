@@ -14,11 +14,16 @@ const News = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
     const letras =
-      "アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      "アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const fontSize = 16;
     const columnas = canvas.width / fontSize;
     const gotas = Array.from({ length: columnas }).fill(1);
@@ -40,7 +45,10 @@ const News = () => {
     };
 
     const interval = setInterval(dibujar, 33);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", resizeCanvas);
+    };
   }, []);
 
   // 🔹 Cargar noticias publicadas
@@ -94,10 +102,7 @@ const News = () => {
 
       {/* Carrusel 3D */}
       <div className={`wrapper ${noticiaSeleccionada ? "blurred" : ""}`}>
-        <div
-          className="inner"
-          style={{ "--quantity": noticiasFiltradas.length || 1 }}
-        >
+        <div className="inner" style={{ "--quantity": noticiasFiltradas.length || 1 }}>
           {noticiasFiltradas.map((n, index) => (
             <div
               key={n.id}
@@ -117,15 +122,15 @@ const News = () => {
 
               <div className="info-box">
                 <h3>{n.titulo}</h3>
-                <p>📂 {n.categoria}</p>
                 <p>✍️ {n.autorEmail}</p>
+                <p>📂 {n.categoria}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal con noticia completa */}
       {noticiaSeleccionada && (
         <div className="modal-overlay" onClick={() => setNoticiaSeleccionada(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -133,15 +138,17 @@ const News = () => {
               ✖
             </button>
 
-            <img
-              src={noticiaSeleccionada.imagenUrl || "https://via.placeholder.com/600x400"}
-              alt={noticiaSeleccionada.titulo}
-              className="modal-img"
-            />
-
             <h2 className="modal-title">{noticiaSeleccionada.titulo}</h2>
             {noticiaSeleccionada.subtitulo && (
               <h4 className="modal-subtitle">{noticiaSeleccionada.subtitulo}</h4>
+            )}
+
+            {noticiaSeleccionada.imagenUrl && (
+              <img
+                src={noticiaSeleccionada.imagenUrl}
+                alt={noticiaSeleccionada.titulo}
+                className="modal-img"
+              />
             )}
 
             <div className="modal-body">
