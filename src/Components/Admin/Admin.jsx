@@ -55,7 +55,8 @@ const Admin = () => {
       for (let i = 0; i < gotas.length; i++) {
         const texto = letras.charAt(Math.floor(Math.random() * letras.length));
         ctx.fillText(texto, i * fontSize, gotas[i] * fontSize);
-        if (gotas[i] * fontSize > canvas.height && Math.random() > 0.975) gotas[i] = 0;
+        if (gotas[i] * fontSize > canvas.height && Math.random() > 0.975)
+          gotas[i] = 0;
         gotas[i]++;
       }
     };
@@ -247,6 +248,7 @@ const Admin = () => {
                         Estado: {n.estado}
                       </Typography>
 
+                      {/* 🔘 BOTONES ACTUALIZADOS */}
                       <Box className="admin-actions">
                         <Button
                           variant="outlined"
@@ -285,6 +287,20 @@ const Admin = () => {
                             onClick={() => confirmarCambioEstado(n.id, "Desactivado")}
                           >
                             🚫 Desactivar
+                          </Button>
+                        )}
+
+                        {n.estado === "Desactivado" && (
+                          <Button
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#0099ff",
+                              color: "#fff",
+                              "&:hover": { backgroundColor: "#0077cc" },
+                            }}
+                            onClick={() => confirmarCambioEstado(n.id, "Publicado")}
+                          >
+                            🔁 Reactivar
                           </Button>
                         )}
                       </Box>

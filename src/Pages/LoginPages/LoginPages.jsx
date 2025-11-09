@@ -186,6 +186,7 @@ const LoginPage = () => {
         </form>
       </motion.div>
     </div>
+    
   );
 };
 

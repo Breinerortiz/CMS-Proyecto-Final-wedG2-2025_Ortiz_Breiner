@@ -1,9 +1,10 @@
 .admin-matrix-wrapper {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: black;
+  color: #e0ffe0;
 }
 
 .matrix-canvas {
@@ -12,8 +13,8 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -2;
   background: black;
-  z-index: 1;
 }
 
 .matrix-overlay {
@@ -22,146 +23,134 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 10, 0, 0.8);
-  z-index: 2;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.95));
+  z-index: -1;
 }
 
 .admin-dashboard {
   position: relative;
-  z-index: 3;
-  padding: 1rem 2rem;
-  color: #fff;
+  z-index: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  color: #ccffcc;
 }
 
 .admin-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 255, 128, 0.2);
+  background: rgba(0, 20, 0, 0.6);
+  border: 1px solid #00ff80;
+  box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
 }
 
 .admin-header-title {
   color: #00ff99;
-  font-weight: 600;
+  font-weight: 700;
+  margin-left: 1rem;
+  text-shadow: 0 0 8px #00ff99;
 }
 
 .admin-content {
-  margin-top: 1.5rem;
+  flex: 1;
 }
 
 .admin-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-card {
+  transition: all 0.3s ease;
 }
 
 .card-dark {
-  background: rgba(0, 30, 0, 0.8);
-  color: white;
+  background: rgba(0, 20, 0, 0.6);
   border: 1px solid rgba(0, 255, 128, 0.2);
-  border-radius: 12px;
+  border-radius: 15px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #e0ffe0;
+  box-shadow: 0 0 15px rgba(0, 255, 128, 0.15);
+  transition: all 0.3s ease;
 }
 
 .card-dark:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 15px rgba(0, 255, 128, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 128, 0.4);
+  border-color: #00ff80;
 }
 
 .admin-img {
   width: 100%;
-  height: 160px;
+  height: 180px;
   object-fit: cover;
+  border-bottom: 1px solid rgba(0, 255, 128, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card-dark:hover .admin-img {
+  filter: brightness(1.15) saturate(1.2);
 }
 
 .admin-card-content {
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .admin-card-title {
+  font-size: 1.2rem;
   font-weight: bold;
   color: #00ff99;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 6px rgba(0, 255, 128, 0.4);
 }
 
 .admin-card-sub {
-  color: #baffd9;
+  color: #bfffd0;
   font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
 .admin-actions {
-  margin-top: 1rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
 }
 
 .admin-modal {
-  background: rgba(0, 20, 0, 0.95);
-  padding: 2rem;
+  background: rgba(0, 20, 0, 0.9);
+  color: #e0ffe0;
+  padding: 2.5rem;
   border-radius: 15px;
-  width: 600px;
+  max-width: 800px;
+  width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 0 25px rgba(0, 255, 128, 0.4);
+  box-shadow: 0 0 25px rgba(0, 255, 128, 0.5);
+  border: 1px solid rgba(0, 255, 128, 0.3);
   position: relative;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: #00ff99;
 }
 
 .modal-img {
   width: 100%;
   border-radius: 10px;
   margin: 1rem 0;
-}
-/* === EFECTO NEÓN PULSANTE PARA EL DRAWER === */
-
-.MuiDrawer-paper {
-  box-shadow: 0 0 25px rgba(0, 255, 128, 0.3);
-  border-right: 2px solid #00ff80 !important;
-  animation: neonGlow 3s ease-in-out infinite alternate;
+  box-shadow: 0 0 15px rgba(0, 255, 128, 0.3);
 }
 
-/* Animación del brillo verde pulsante */
-@keyframes neonGlow {
-  0% {
-    box-shadow: 0 0 15px rgba(0, 255, 128, 0.2),
-      inset 0 0 10px rgba(0, 255, 128, 0.1);
-    border-color: rgba(0, 255, 128, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(0, 255, 128, 0.6),
-      inset 0 0 20px rgba(0, 255, 128, 0.3);
-    border-color: rgba(0, 255, 128, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 15px rgba(0, 255, 128, 0.3),
-      inset 0 0 10px rgba(0, 255, 128, 0.1);
-    border-color: rgba(0, 255, 128, 0.5);
-  }
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #00ff80;
+  transition: all 0.3s ease;
 }
 
-/* Sutil resplandor en los textos del menú */
-.MuiListItemButton-root {
-  transition: all 0.3s ease-in-out;
-}
-
-.MuiListItemButton-root:hover {
-  text-shadow: 0 0 8px rgba(0, 255, 128, 0.8);
-  background-color: rgba(0, 255, 128, 0.1);
-}
-
-/* Resalta la categoría seleccionada con borde luminoso */
-.Mui-selected {
-  border-left: 3px solid #00ff80;
-  box-shadow: inset 0 0 15px rgba(0, 255, 128, 0.3);
-  text-shadow: 0 0 8px rgba(0, 255, 128, 0.8);
+.close-btn:hover {
+  color: #00cc66;
+  transform: rotate(90deg);
 }

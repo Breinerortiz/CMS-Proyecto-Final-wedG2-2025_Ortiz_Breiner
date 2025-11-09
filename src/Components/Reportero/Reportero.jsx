@@ -28,6 +28,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ReplayIcon from "@mui/icons-material/Replay";
 import Swal from "sweetalert2";
 import { onAuthStateChanged } from "firebase/auth";
 import { motion } from "framer-motion";
@@ -101,7 +103,6 @@ const Reportero = () => {
           contenido,
           categoria,
           imagenUrl: imagenUrl || undefined,
-          estado: "Terminado",
         });
         Swal.fire("✅ Noticia actualizada", "", "success");
       } else {
@@ -155,6 +156,20 @@ const Reportero = () => {
       Swal.fire("Eliminada", "La noticia fue eliminada.", "success");
       cargarNoticias(usuario);
     }
+  };
+
+  const cambiarEstado = async (id, nuevoEstado) => {
+    const noticiaRef = doc(db, "noticias", id);
+    await updateDoc(noticiaRef, { estado: nuevoEstado });
+    Swal.fire({
+      title: `Estado cambiado a ${nuevoEstado}`,
+      icon: "success",
+      timer: 1500,
+      showConfirmButton: false,
+      background: "#111",
+      color: "#00ff80",
+    });
+    cargarNoticias(usuario);
   };
 
   return (
@@ -298,7 +313,26 @@ const Reportero = () => {
                             <DeleteIcon />
                           </IconButton>
                         </Tooltip>
+                        <Tooltip title="Marcar como Terminado">
+                          <IconButton
+                            sx={{ color: "#00ff99" }}
+                            onClick={() => cambiarEstado(n.id, "Terminado")}
+                          >
+                            <CheckCircleIcon />
+                          </IconButton>
+                        </Tooltip>
                       </>
+                    )}
+
+                    {n.estado === "Terminado" && (
+                      <Tooltip title="Volver a Edición">
+                        <IconButton
+                          sx={{ color: "#ffcc00" }}
+                          onClick={() => cambiarEstado(n.id, "Edición")}
+                        >
+                          <ReplayIcon />
+                        </IconButton>
+                      </Tooltip>
                     )}
                   </Box>
                 </CardContent>
