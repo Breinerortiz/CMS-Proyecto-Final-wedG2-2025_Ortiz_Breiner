@@ -1,7 +1,7 @@
 /* === Fondo general === */
 .wrapper {
   width: 100%;
-  height: 100vh;
+  height: 80vh; /* 🔹 más espacio vertical controlado */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,14 +10,13 @@
   position: relative;
 }
 
-/* === Carrusel centrado === */
-.inner {
-  --w: 320px;
-  --h: 480px;
-  --translateZ: 600px;
-  --rotateX: 0deg;
-  --perspective: 1600px;
 
+.inner {
+  --w: 260px; /* 🔹 antes 320px */
+  --h: 400px; /* 🔹 antes 480px */
+  --translateZ: 520px; /* 🔹 ajustado a tamaño más compacto */
+  --rotateX: 0deg;
+  --perspective: 1400px;
   position: relative;
   width: var(--w);
   height: var(--h);
@@ -40,21 +39,23 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
   transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+ box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
   background: #fff;
-  transition: transform 0.5s ease;
+ transition: transform 0.5s ease, box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
 }
 
 .card:hover {
   transform: scale(1.05)
     rotateY(calc((360deg / var(--quantity)) * var(--index)))
     translateZ(var(--translateZ));
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* === Imagen (arriba) === */
@@ -385,5 +386,15 @@
   opacity: 0;
   transform: translateY(-20px);
   pointer-events: none;
+  transition: all 0.4s ease;
+}
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 60px auto 35px; /* 🔹 Aumentamos el margen superior */
+  animation: fadeIn 0.8s ease;
   transition: all 0.4s ease;
 }
