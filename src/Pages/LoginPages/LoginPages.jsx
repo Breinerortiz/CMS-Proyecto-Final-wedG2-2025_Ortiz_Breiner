@@ -15,6 +15,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import MatrixLoader from "../../Components/MatrixLoader/MatrixLoader" // 👈 Importa el loader
 import "./LoginPages.css";
 
 const LoginPage = () => {
@@ -24,7 +25,8 @@ const LoginPage = () => {
   const [role, setRole] = useState("reportero");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [typedText, setTypedText] = useState(""); // texto animado
+  const [typedText, setTypedText] = useState("");
+  const [loading, setLoading] = useState(false); // 👈 nuevo estado
   const navigate = useNavigate();
 
   const titleText = "Bienvenido al Diario Digital UDLA";
@@ -36,7 +38,7 @@ const LoginPage = () => {
       setTypedText((prev) => prev + titleText.charAt(i));
       i++;
       if (i >= titleText.length) clearInterval(interval);
-    }, 70); // velocidad de escritura
+    }, 70);
     return () => clearInterval(interval);
   }, []);
 
@@ -70,10 +72,14 @@ const LoginPage = () => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
+          setLoading(true); // 👈 muestra loader
           const rol = docSnap.data().rol;
-          if (rol === "reportero") navigate("/reportero");
-          else if (rol === "editor") navigate("/admin");
-          else navigate("/");
+
+          setTimeout(() => { // 👈 simula carga antes del navigate
+            if (rol === "reportero") navigate("/reportero");
+            else if (rol === "editor") navigate("/admin");
+            else navigate("/");
+          }, 2000);
         } else {
           setError("No se encontró información del usuario.");
         }
@@ -82,6 +88,11 @@ const LoginPage = () => {
       }
     }
   };
+
+  // 👇 mientras loading sea true, mostramos el loader
+  if (loading) {
+    return <MatrixLoader />;
+  }
 
   return (
     <div className="login-bg">
@@ -99,7 +110,6 @@ const LoginPage = () => {
           className="login-logo"
         />
 
-        {/* 👇 Texto con efecto typing */}
         <Typography variant="h5" className="typing-text">
           {typedText}
           <span className="cursor">|</span>
@@ -151,16 +161,8 @@ const LoginPage = () => {
             </TextField>
           )}
 
-          {error && (
-            <Alert severity="error" className="login-alert">
-              {error}
-            </Alert>
-          )}
-          {success && (
-            <Alert severity="success" className="login-alert">
-              {success}
-            </Alert>
-          )}
+          {error && <Alert severity="error" className="login-alert">{error}</Alert>}
+          {success && <Alert severity="success" className="login-alert">{success}</Alert>}
 
           <Button type="submit" variant="contained" fullWidth className="login-button">
             {isRegister ? "Registrarme" : "Ingresar"}
@@ -186,7 +188,6 @@ const LoginPage = () => {
         </form>
       </motion.div>
     </div>
-    
   );
 };
 
