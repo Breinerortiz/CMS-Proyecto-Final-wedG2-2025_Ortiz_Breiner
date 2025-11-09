@@ -3,10 +3,11 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Pages/Main/Main";
 import News from "./Pages/News/News";
-import LoginPage from "./Pages/LoginPages/LoginPages"; 
+import LoginPage from "./Pages/LoginPages/LoginPages";
 import Admin from "./Pages/Admin/Admin";
 import Reportero from "./Pages/Reportero/Reportero";
 import ProtectedRoute from "./Pages/ProtectedRoute/ProtectedRoute";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -42,13 +43,11 @@ function App() {
           }
         />
 
-       
+
         <Route
-          path="*"
+          path="/*"
           element={
-            <h2 style={{ textAlign: "center", marginTop: "100px" }}>
-              Página no encontrada
-            </h2>
+            <NotFound />
           }
         />
       </Routes>
