@@ -12,9 +12,9 @@
 
 
 .inner {
-  --w: 260px; /* 🔹 antes 320px */
-  --h: 400px; /* 🔹 antes 480px */
-  --translateZ: 520px; /* 🔹 ajustado a tamaño más compacto */
+  --w: 200px; /* 🔹 antes 320px */
+  --h: 300px; /* 🔹 antes 480px */
+  --translateZ: 420px; 
   --rotateX: 0deg;
   --perspective: 1400px;
   position: relative;
@@ -394,7 +394,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 60px auto 35px; /* 🔹 Aumentamos el margen superior */
+  margin: 60px ; /* 🔹 Aumentamos el margen superior */
   animation: fadeIn 0.8s ease;
   transition: all 0.4s ease;
 }
