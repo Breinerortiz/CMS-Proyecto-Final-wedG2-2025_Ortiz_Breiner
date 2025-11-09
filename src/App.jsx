@@ -3,7 +3,7 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Pages/Main/Main";
 import News from "./Pages/News/News";
-import LoginPage from "./Pages/LoginPages/LoginPages"; // asegúrate que el nombre coincida exactamente
+import LoginPage from "./Pages/LoginPages/LoginPages"; 
 import Admin from "./Pages/Admin/Admin";
 import Reportero from "./Pages/Reportero/Reportero";
 import ProtectedRoute from "./Pages/ProtectedRoute/ProtectedRoute";

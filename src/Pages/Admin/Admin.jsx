@@ -65,7 +65,7 @@ const Admin = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // 🔄 Cargar noticias
+
   const cargarNoticias = async () => {
     const snapshot = await getDocs(collection(db, "noticias"));
     const lista = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -88,15 +88,15 @@ const Admin = () => {
       nuevoEstado === "Publicado"
         ? "publicar"
         : nuevoEstado === "Desactivado"
-        ? "desactivar"
-        : "reactivar";
+          ? "desactivar"
+          : "reactivar";
 
     const color =
       nuevoEstado === "Publicado"
         ? "#00ff80"
         : nuevoEstado === "Desactivado"
-        ? "#ff5555"
-        : "#0099ff";
+          ? "#ff5555"
+          : "#0099ff";
 
     const result = await Swal.fire({
       title: `¿Deseas ${accion} esta noticia?`,
@@ -241,8 +241,8 @@ const Admin = () => {
                             n.estado === "Publicado"
                               ? "#00ff80"
                               : n.estado === "Desactivado"
-                              ? "#ff5555"
-                              : "#999",
+                                ? "#ff5555"
+                                : "#999",
                         }}
                       >
                         Estado: {n.estado}
@@ -335,10 +335,28 @@ const Admin = () => {
                 <IconButton onClick={() => setNoticiaSeleccionada(null)} className="close-btn">
                   <CloseIcon />
                 </IconButton>
-                <Typography variant="h4" sx={{ color: "#00ff99", fontWeight: 700 }}>
+
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: "#00ff99",
+                    fontWeight: 700,
+                    textShadow: "0 0 12px rgba(0,255,128,0.6)",
+                    mb: 1,
+                  }}
+                >
                   {noticiaSeleccionada.titulo}
                 </Typography>
-                <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
+
+                <Typography
+                  variant="h6"
+                  sx={{
+                    mb: 2,
+                    color: "#aaffcc", // 🌟 verde claro legible
+                    textShadow: "0 0 8px rgba(0, 255, 128, 0.5)",
+                    fontStyle: "italic",
+                  }}
+                >
                   {noticiaSeleccionada.subtitulo}
                 </Typography>
 
@@ -349,13 +367,23 @@ const Admin = () => {
                     className="modal-img"
                   />
                 )}
-                <Typography variant="body1" sx={{ mt: 2, lineHeight: 1.7, color: "#e0ffe0" }}>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    mt: 2,
+                    lineHeight: 1.7,
+                    color: "#e0ffe0",
+                    whiteSpace: "pre-line", // mantiene saltos de línea del texto
+                  }}
+                >
                   {noticiaSeleccionada.contenido}
                 </Typography>
               </motion.div>
             </Modal>
           )}
         </AnimatePresence>
+
       </Box>
     </Box>
   );

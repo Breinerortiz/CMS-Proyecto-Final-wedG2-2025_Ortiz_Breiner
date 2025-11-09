@@ -15,7 +15,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import MatrixLoader from "../../Components/MatrixLoader/MatrixLoader" // 👈 Importa el loader
+import MatrixLoader from "../../Components/MatrixLoader/MatrixLoader" 
 import "./LoginPages.css";
 
 const LoginPage = () => {
@@ -26,7 +26,7 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [typedText, setTypedText] = useState("");
-  const [loading, setLoading] = useState(false); // 👈 nuevo estado
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const titleText = "Bienvenido al Diario Digital UDLA";
@@ -72,10 +72,10 @@ const LoginPage = () => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setLoading(true); // 👈 muestra loader
+          setLoading(true); 
           const rol = docSnap.data().rol;
 
-          setTimeout(() => { // 👈 simula carga antes del navigate
+          setTimeout(() => { 
             if (rol === "reportero") navigate("/reportero");
             else if (rol === "editor") navigate("/admin");
             else navigate("/");
@@ -89,7 +89,7 @@ const LoginPage = () => {
     }
   };
 
-  // 👇 mientras loading sea true, mostramos el loader
+ 
   if (loading) {
     return <MatrixLoader />;
   }
