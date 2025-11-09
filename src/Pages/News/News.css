@@ -177,14 +177,16 @@
   border: 1px solid #00ff99;
   box-shadow: 0 0 30px #00ff99;
   border-radius: 12px;
-  padding: 2rem;
-  max-width: 800px;
+  padding: 1.5rem; /* más pequeño */
+  width: 80%; /* reducimos el ancho */
+  max-width: 600px; /* antes 800px */
   color: #e0ffe0;
   position: relative;
   overflow-y: auto;
-  max-height: 90vh;
+  max-height: 80vh; /* más pequeño */
   animation: fadeInModal 0.3s ease-out;
 }
+
 
 @keyframes fadeInModal {
   from {
@@ -200,7 +202,7 @@
 /* Imagen adaptativa */
 .modal-img {
   width: 100%;
-  max-height: 400px;
+  max-height: 300px;
   object-fit: contain;
   border-radius: 10px;
   margin-bottom: 1rem;
