@@ -84,3 +84,15 @@
   background-color: #00cc77 !important;
   box-shadow: 0 0 15px #00ff99;
 }
+/* ====== Botón secundario (Ver Noticias) ====== */
+.main-button-outline {
+background-color: #00ff99 !important;
+  color: #000 !important;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.main-button-outline:hover {
+ background-color: #00cc77 !important;
+  box-shadow: 0 0 15px #00ff99;
+}

@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Container, Typography, Button } from "@mui/material";
+import { Container, Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
 import "./Main.css";
 
 const Main = () => {
@@ -21,7 +20,7 @@ const Main = () => {
     window.addEventListener("resize", resizeCanvas);
 
     const letras =
-      "アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      "アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const fontSize = 16;
     const columnas = canvas.width / fontSize;
     const gotas = Array.from({ length: columnas }).fill(1);
@@ -83,26 +82,46 @@ const Main = () => {
             comprometido con la veracidad, la independencia y la innovación periodística.
           </Typography>
 
+          {/* 🔹 Botones principales */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
           >
-            <Button
-              component={Link}
-              to="/login"
-              variant="contained"
-              size="large"
-              className="main-button"
+            <Box
+              sx={{
+                display: "flex",
+                gap: 2,
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
             >
-              Acceder al Panel Administrativo
-            </Button>
+              <Button
+                component={Link}
+                to="/login"
+                variant="contained"
+                size="large"
+                className="main-button"
+              >
+                Acceder al Panel Administrativo
+              </Button>
+
+              <Button
+                component={Link}
+                to="/news"
+                variant="outlined"
+                size="large"
+                className="main-button-outline"
+              >
+                Ver Noticias 📰
+              </Button>
+            </Box>
           </motion.div>
         </motion.div>
       </Container>
-   
     </div>
-  )
+  );
 };
 
 export default Main;
+
