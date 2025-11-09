@@ -1,26 +1,45 @@
 .header-toolbar {
-  background: transparent;
-  height: 70px;
-  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 1.5rem;
 }
 
 .header-logo {
-  height: 45px;
-  filter: drop-shadow(0 0 8px #00ff41);
+  width: 40px;
+  filter: drop-shadow(0 0 6px #00ff80);
+}
+
+/* Links normales */
+.nav-links {
+  display: flex;
+  gap: 1rem;
 }
 
 .nav-btn {
-  color: #00ff41 !important;
+  color: #00ff80 !important;
   font-weight: bold !important;
   text-transform: none !important;
-  margin-left: 10px !important;
-  transition: all 0.3s ease-in-out !important;
-  border-bottom: 2px solid transparent !important;
+  transition: all 0.3s ease !important;
 }
 
 .nav-btn:hover {
-  color: #ffffff !important;
-  border-bottom: 2px solid #00ff41 !important;
-  text-shadow: 0 0 10px #00ff41;
-  transform: scale(1.05);
+  color: #fff !important;
+  text-shadow: 0 0 8px #00ff80;
+}
+
+/* Botón hamburguesa oculto en pantallas grandes */
+.menu-btn {
+  display: none !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none !important;
+  }
+
+  .menu-btn {
+    display: block !important;
+  }
 }
