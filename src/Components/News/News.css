@@ -388,13 +388,56 @@
   pointer-events: none;
   transition: all 0.4s ease;
 }
+/* === Menú de categorías fijo y en una sola línea === */
 .menu {
   display: flex;
+  flex-wrap: nowrap; /* 🔹 evita que los elementos bajen de línea */
+  overflow-x: auto; /* 🔹 permite desplazamiento horizontal si no cabe */
+  scrollbar-width: none; /* 🔹 oculta scrollbar en Firefox */
+  -ms-overflow-style: none; /* 🔹 oculta scrollbar en IE/Edge */
+  gap: 20px;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 60px auto 60px; /* 🔹 Aumentamos el margen superior */
-  animation: fadeIn 0.8s ease;
-  transition: all 0.4s ease;
+  margin: 70px auto 40px; /* 🔹 más espacio arriba y abajo */
+  padding: 10px 20px;
+  scroll-behavior: smooth;
+}
+
+/* 🔹 Oculta scrollbar en navegadores Webkit (Chrome, Safari, Edge) */
+.menu::-webkit-scrollbar {
+  display: none;
+}
+
+/* === Estilo de enlaces del menú === */
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e3f2fd;
+  border-radius: 25px;
+  padding: 10px 18px;
+  color: #1565c0;
+  font-weight: 600;
+  white-space: nowrap; /* 🔹 evita que el texto se parta */
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(21, 101, 192, 0);
+}
+
+.link:hover {
+  background: #bbdefb;
+  transform: scale(1.08);
+  box-shadow: 0 0 10px rgba(21, 101, 192, 0.3);
+}
+
+.link.active {
+  background: #1565c0;
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
+}
+
+/* Icono dentro del link */
+.link-icon {
+  font-size: 1.3rem;
 }
