@@ -5,10 +5,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* 👈 antes estaba center, lo bajamos para no tapar el header */
 }
 
-
+/* ===== Fondo Matrix ===== */
 .matrix-canvas {
   position: fixed;
   top: 0;
@@ -19,19 +19,15 @@
   z-index: 1;
 }
 
-
-
-
 /* ===== Menú ===== */
 .menu {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 90px; /* 👈 espacio debajo del header */
   position: relative;
-  z-index: 999;
-  position: relative;
+  z-index: 5; /* 👈 debajo del header pero encima del fondo */
 }
 
 .link {
@@ -42,19 +38,26 @@
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
+  background: rgba(0, 255, 100, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 10px rgba(0, 255, 100, 0.2);
 }
 
 .link:hover {
-  background: rgba(0, 255, 100, 0.15);
+  background: rgba(0, 255, 100, 0.2);
   box-shadow: 0 0 15px #00ff99;
+  transform: scale(1.05);
 }
 
 .link.active {
-  background: rgba(0, 255, 100, 0.25);
-  box-shadow: 0 0 20px #00ff99;
+  background: rgba(0, 255, 100, 0.3);
+  box-shadow: 0 0 25px #00ff99;
+  transform: scale(1.07);
 }
 
-/* ===== CARRUSEL 3D ===== */
+/* ===== Carrusel 3D ===== */
 .wrapper {
   width: 100%;
   height: 600px;
@@ -135,7 +138,6 @@
   background: rgba(0, 255, 100, 0.1);
 }
 
-
 /* ===== Modal ===== */
 .modal-overlay {
   position: fixed;
@@ -204,6 +206,3 @@
 .close-btn:hover {
   color: #ff4f4f;
 }
-
-
-
