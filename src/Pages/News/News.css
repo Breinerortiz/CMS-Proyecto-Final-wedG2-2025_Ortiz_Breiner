@@ -71,7 +71,7 @@
 
 .inner {
   --w: 200px;
-  --h: 360px;
+  --h: 300px;
   --translateZ: calc(var(--w) * 2.3);
   position: relative;
   width: var(--w);

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Components/Main/Main";
-import News from "./Components/News/News";
+import News from "./Pages/News/News";
 import LoginPage from "./Pages/LoginPages/LoginPages"; // asegúrate que el nombre coincida exactamente
 import Admin from "./Components/Admin/Admin";
 import Reportero from "./Components/Reportero/Reportero";
