@@ -1,115 +1,167 @@
-/* ===================== */
-/* 🎨 ESTILO GENERAL ADMIN */
-/* ===================== */
-.admin-container {
-
-  min-height: 100vh;
-  padding: 2rem;
-  animation: fadeIn 0.5s ease-in-out;
+.admin-matrix-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
 }
 
-/* 🧾 Título */
-.admin-title {
-  text-align: center;
-  font-weight: 700;
-  color: #1a237e;
-  margin-bottom: 2rem;
-  animation: slideDown 0.6s ease-out;
+.matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1;
 }
 
-/* 📄 Tarjetas */
-.admin-card {
+.matrix-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 10, 0, 0.8);
+  z-index: 2;
+}
+
+.admin-dashboard {
+  position: relative;
+  z-index: 3;
+  padding: 1rem 2rem;
+  color: #fff;
+}
+
+.admin-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
+  background: rgba(0, 0, 0, 0.8);
   padding: 1rem;
-  border-radius: 12px;
-  background: #00ffc8;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  animation: fadeUp 0.5s ease-in-out;
-}
-
-.admin-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-/* 🖼 Imagen */
-.admin-img {
-  width: 180px;
-  height: 120px;
   border-radius: 10px;
-  object-fit: cover;
-  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(0, 255, 128, 0.2);
 }
 
-/* 🗂 Contenido */
+.admin-header-title {
+  color: #00ff99;
+  font-weight: 600;
+}
+
+.admin-content {
+  margin-top: 1.5rem;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card-dark {
+  background: rgba(0, 30, 0, 0.8);
+  color: white;
+  border: 1px solid rgba(0, 255, 128, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-dark:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 15px rgba(0, 255, 128, 0.4);
+}
+
+.admin-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
 .admin-card-content {
-  flex: 1;
+  padding: 1rem;
 }
 
 .admin-card-title {
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #0d47a1;
+  font-weight: bold;
+  color: #00ff99;
 }
 
 .admin-card-sub {
+  color: #baffd9;
   font-size: 0.9rem;
-  color: #555;
 }
 
-.admin-status {
+.admin-actions {
   margin-top: 1rem;
-  font-weight: 600;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-/* 🎨 Colores por estado */
-.estado-Edición {
-  color: #ff9800;
+.admin-modal {
+  background: rgba(0, 20, 0, 0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 0 25px rgba(0, 255, 128, 0.4);
+  position: relative;
 }
 
-.estado-Terminado {
-  color: #0288d1;
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #00ff99;
 }
 
-.estado-Publicado {
-  color: #2e7d32;
+.modal-img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 1rem 0;
+}
+/* === EFECTO NEÓN PULSANTE PARA EL DRAWER === */
+
+.MuiDrawer-paper {
+  box-shadow: 0 0 25px rgba(0, 255, 128, 0.3);
+  border-right: 2px solid #00ff80 !important;
+  animation: neonGlow 3s ease-in-out infinite alternate;
 }
 
-.estado-Desactivado {
-  color: #b71c1c;
-}
-
-/* ✨ Animaciones */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+/* Animación del brillo verde pulsante */
+@keyframes neonGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(0, 255, 128, 0.2),
+      inset 0 0 10px rgba(0, 255, 128, 0.1);
+    border-color: rgba(0, 255, 128, 0.5);
   }
-  to {
-    opacity: 1;
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 128, 0.6),
+      inset 0 0 20px rgba(0, 255, 128, 0.3);
+    border-color: rgba(0, 255, 128, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(0, 255, 128, 0.3),
+      inset 0 0 10px rgba(0, 255, 128, 0.1);
+    border-color: rgba(0, 255, 128, 0.5);
   }
 }
 
-@keyframes slideDown {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* Sutil resplandor en los textos del menú */
+.MuiListItemButton-root {
+  transition: all 0.3s ease-in-out;
 }
 
-@keyframes fadeUp {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.MuiListItemButton-root:hover {
+  text-shadow: 0 0 8px rgba(0, 255, 128, 0.8);
+  background-color: rgba(0, 255, 128, 0.1);
+}
+
+/* Resalta la categoría seleccionada con borde luminoso */
+.Mui-selected {
+  border-left: 3px solid #00ff80;
+  box-shadow: inset 0 0 15px rgba(0, 255, 128, 0.3);
+  text-shadow: 0 0 8px rgba(0, 255, 128, 0.8);
 }

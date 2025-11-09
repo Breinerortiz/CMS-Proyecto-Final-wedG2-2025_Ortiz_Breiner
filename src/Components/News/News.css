@@ -1,443 +1,201 @@
-/* === Fondo general === */
-.wrapper {
+.news-bg {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 80vh; /* 🔹 más espacio vertical controlado */
+  height: 100%;
+  z-index: 0;
+  background: #000;
+}
+
+/* ===== Menú ===== */
+.menu {
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(180deg, #e3f2fd, #bbdefb);
-  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  z-index: 2;
   position: relative;
 }
 
+.link {
+  color: #00ff99;
+  border: 1px solid #00ff99;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.link:hover {
+  background: rgba(0, 255, 100, 0.15);
+  box-shadow: 0 0 15px #00ff99;
+}
+
+.link.active {
+  background: rgba(0, 255, 100, 0.25);
+  box-shadow: 0 0 20px #00ff99;
+}
+
+/* ===== CARRUSEL 3D ===== */
+.wrapper {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1500px;
+  transition: filter 0.3s;
+  z-index: 2;
+}
 
 .inner {
-  --w: 200px; /* 🔹 antes 320px */
-  --h: 300px; /* 🔹 antes 480px */
-  --translateZ: 420px; 
-  --rotateX: 0deg;
-  --perspective: 1400px;
+  --w: 200px;
+  --h: 360px;
+  --translateZ: calc(var(--w) * 2.3);
   position: relative;
   width: var(--w);
   height: var(--h);
   transform-style: preserve-3d;
-  animation: rotating 30s linear infinite;
+  animation: rotate3D 25s linear infinite;
 }
 
-@keyframes rotating {
+@keyframes rotate3D {
   from {
-    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
+    transform: rotateY(0deg);
   }
   to {
-    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
+    transform: rotateY(360deg);
   }
 }
 
-/* === Tarjetas === */
 .card {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 18px;
+  width: var(--w);
+  height: var(--h);
+  border-radius: 15px;
   overflow: hidden;
-  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
- box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-  background: #fff;
- transition: transform 0.5s ease, box-shadow 0.4s ease;
-  display: flex;
-  flex-direction: column;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index)))
+    translateZ(var(--translateZ));
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(var(--color-card), 0.5);
+  box-shadow: 0 0 10px rgba(var(--color-card), 0.2);
+  transition: transform 0.4s, box-shadow 0.3s, border-color 0.3s;
   cursor: pointer;
-
 }
 
+/* 🌟 Efecto hover */
 .card:hover {
-  transform: scale(1.05)
+  transform: scale(1.1)
     rotateY(calc((360deg / var(--quantity)) * var(--index)))
     translateZ(var(--translateZ));
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 25px rgba(0, 255, 100, 0.7);
+  border-color: rgba(0, 255, 100, 0.9);
 }
 
-/* === Imagen (arriba) === */
+/* ===== Imagen y texto ===== */
 .img {
   width: 100%;
-  height: 60%;
+  height: 70%;
   background-size: cover;
   background-position: center;
-  border-bottom: 4px solid #2196f3;
 }
 
-/* === Caja de información (debajo de la imagen) === */
 .info-box {
-  flex: 1;
-  padding: 16px;
-  background: #fafafa;
-  color: #333;
+  padding: 1rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: #d0ffd0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: background 0.3s;
 }
 
 .info-box h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #0d47a1;
-  margin-bottom: 8px;
+  color: #00ff99;
+  margin-bottom: 0.3rem;
 }
 
-.info-box p {
-  font-size: 0.9rem;
-  margin: 2px 0;
-  color: #555;
-}
-
-/* === Hover === */
 .card:hover .info-box {
-  background: #e3f2fd;
-  transition: background 0.3s ease;
+  background: rgba(0, 255, 100, 0.1);
 }
 
-.card:hover h3 {
-  color: #1976d2;
-  transition: color 0.3s ease;
-}
 
-/* === Modal === */
+/* ===== Modal ===== */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(6px);
+  background: rgba(10, 10, 10, 0.95);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
-  overflow: hidden;
+  justify-content: center;
+  z-index: 999;
 }
 
 .modal-content {
-  background: #ffffff;
-  width: 90%;
-  max-width: 650px;
-  max-height: 85vh; /* <-- limita la altura total */
-  border-radius: 16px;
-  padding: 20px;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  overflow-y: auto; /* <-- scroll interno */
-  scrollbar-width: thin;
-  scrollbar-color: #2196f3 #e3f2fd;
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-img {
-  width: 100%;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid #00ff99;
+  box-shadow: 0 0 30px #00ff99;
   border-radius: 12px;
-  margin-bottom: 15px;
+  padding: 2rem;
+  max-width: 800px;
+  color: #e0ffe0;
+  position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+  animation: fadeInModal 0.3s ease-out;
 }
 
-.modal-content h2 {
-  color: #0d47a1;
-  margin-bottom: 10px;
-}
-
-.modal-content p {
-  color: #333;
-  margin: 6px 0;
-  line-height: 1.5;
-}
-
-.contenido {
-  margin-top: 12px;
-  text-align: justify;
-  font-size: 0.95rem;
-  color: #444;
-}
-
-/* === Botón de cerrar === */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: #e53935;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.close-btn:hover {
-  background: #c62828;
-}
-/* === Barra de filtros === */
-.filter-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 25px auto 30px;
-  animation: fadeIn 0.8s ease;
-}
-
-.filter-btn {
-  background: #e3f2fd;
-  border: 2px solid transparent;
-  color: #1565c0;
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 0 rgba(21, 101, 192, 0);
-}
-
-.filter-btn:hover {
-  background: #bbdefb;
-  transform: scale(1.08);
-  box-shadow: 0 0 10px rgba(21, 101, 192, 0.3);
-}
-
-.filter-btn.active {
-  background: #1565c0;
-  color: #fff;
-  border-color: #0d47a1;
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
-}
-
-/* Animación de entrada de las tarjetas */
-.fadeIn {
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
+@keyframes fadeInModal {
   from {
     opacity: 0;
-    transform: scale(0.97);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
-/* === NUEVO: Animación de entrada/salida al filtrar === */
-.card {
-  opacity: 1;
-  transform-origin: center;
-  transition: 
-    opacity 0.5s ease,
-    transform 0.6s ease,
-    filter 0.3s ease;
+
+.modal-img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #00ff99;
 }
 
-.card.hide {
-  opacity: 0;
-  transform: scale(0.8) rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
-  pointer-events: none;
-  filter: blur(4px);
+.modal-title {
+  text-align: center;
+  color: #00ff99;
 }
 
-.card.show {
-  opacity: 1;
-  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
-  pointer-events: auto;
-  filter: blur(0);
+.modal-subtitle {
+  text-align: center;
+  color: #88ffaa;
+  margin-bottom: 1rem;
 }
 
-/* === NUEVO: Efecto de transición al cambiar categoría === */
-.inner.transitioning {
-  animation: none !important;
-  transition: transform 0.8s ease;
-  filter: brightness(0.9);
-}
-
-/* === NUEVO: Mensaje cuando no hay resultados === */
-.no-results {
+.close-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #1565c0;
-  font-size: 1.2rem;
-  font-weight: 600;
-  background: #e3f2fd;
-  padding: 12px 24px;
-  border-radius: 20px;
-  box-shadow: 0 3px 12px rgba(21, 101, 192, 0.2);
-  display: none;
-  animation: fadeIn 0.5s ease;
-}
-
-.no-results.show {
-  display: block;
-}
-/* ===========================
-   MENÚ DE CATEGORÍAS ANIMADO (mejorado)
-=========================== */
-.menu {
-  position: absolute;
-  top: 90px; /* 🔹 más abajo del carrusel */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 10px 25px;
-  border-radius: 40px;
-  box-shadow: 0 5px 15px rgba(21, 101, 192, 0.25);
-  backdrop-filter: blur(8px);
-  z-index: 1200;
-  animation: fadeDown 0.6s ease;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* 🔹 Cuando el modal está abierto, ocultar el menú */
-.modal-overlay ~ .menu,
-.modal-overlay + .menu {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -15px);
-}
-
-/* === Enlaces del menú === */
-.link {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #1565c0;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 8px 16px;
-  border-radius: 30px;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #00ff99;
+  font-size: 1.6rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  text-decoration: none;
 }
 
-.link:hover {
-  background: #e3f2fd;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(21, 101, 192, 0.2);
-}
-
-.link.active {
-  background: #1565c0;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.4);
-  transform: scale(1.1);
-}
-
-.link-icon {
-  font-size: 1.3rem;
-}
-
-.link-title {
-  font-size: 0.95rem;
-  letter-spacing: 0.3px;
-}
-
-@keyframes fadeDown {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -20px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-/* === Responsive === */
-@media (max-width: 768px) {
-  .menu {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 8px 12px;
-    top: 70px;
-  }
-
-  .link {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-
-  .link-icon {
-    font-size: 1.1rem;
-  }
-}
-/* === Cuando se abre el modal, el menú desaparece === */
-.menu.oculto {
-  opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
-  transition: all 0.4s ease;
-}
-/* === Menú de categorías fijo y en una sola línea === */
-.menu {
-  display: flex;
-  flex-wrap: nowrap; /* 🔹 evita que los elementos bajen de línea */
-  overflow-x: auto; /* 🔹 permite desplazamiento horizontal si no cabe */
-  scrollbar-width: none; /* 🔹 oculta scrollbar en Firefox */
-  -ms-overflow-style: none; /* 🔹 oculta scrollbar en IE/Edge */
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  margin: 70px auto 40px; /* 🔹 más espacio arriba y abajo */
-  padding: 10px 20px;
-  scroll-behavior: smooth;
-}
-
-/* 🔹 Oculta scrollbar en navegadores Webkit (Chrome, Safari, Edge) */
-.menu::-webkit-scrollbar {
-  display: none;
-}
-
-/* === Estilo de enlaces del menú === */
-.link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #e3f2fd;
-  border-radius: 25px;
-  padding: 10px 18px;
-  color: #1565c0;
-  font-weight: 600;
-  white-space: nowrap; /* 🔹 evita que el texto se parta */
-  transition: all 0.3s ease;
-  cursor: pointer;
-  box-shadow: 0 0 0 rgba(21, 101, 192, 0);
-}
-
-.link:hover {
-  background: #bbdefb;
-  transform: scale(1.08);
-  box-shadow: 0 0 10px rgba(21, 101, 192, 0.3);
-}
-
-.link.active {
-  background: #1565c0;
-  color: #fff;
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(13, 71, 161, 0.4);
-}
-
-/* Icono dentro del link */
-.link-icon {
-  font-size: 1.3rem;
+.close-btn:hover {
+  color: #ff4f4f;
 }

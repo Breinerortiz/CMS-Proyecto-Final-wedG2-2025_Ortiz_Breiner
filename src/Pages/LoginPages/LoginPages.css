@@ -1,86 +1,133 @@
-/* 🎨 Estilos para la pantalla de Login */
-
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font-family: 'Roboto', sans-serif;
+}
+.login-bg {
+  position: relative;
+  width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, #1976d2, #42a5f5);
-  padding: 20px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.matrix-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    rgba(0, 255, 0, 0.05) 0%,
+    rgba(0, 255, 0, 0.05) 1px,
+    transparent 2px
+  );
+  animation: matrixRain 10s linear infinite;
+  opacity: 0.2;
+}
+
+@keyframes matrixRain {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: 1000px;
+  }
 }
 
 .login-box {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  padding: 40px;
-  width: 100%;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
   max-width: 400px;
   text-align: center;
-  animation: fadeIn 0.5s ease-in-out;
+  z-index: 2;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+  color: #00ff99;
 }
 
 .login-logo {
-  width: 80px;
-  margin-bottom: 15px;
+  width: 90px;
+  margin-bottom: 10px;
 }
 
 .login-title {
-  color: #0d47a1 !important;
-  font-weight: bold !important;
-  margin-bottom: 20px !important;
+  color: #00ff99;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
-.login-form {
-  margin-top: 10px;
+.login-input {
+  color: #00ff99 !important;
+  border-color: #00ff99 !important;
+}
+
+.login-label {
+  color: #00ff99 !important;
+}
+
+.MuiOutlinedInput-root fieldset {
+  border-color: rgba(0, 255, 0, 0.3) !important;
+}
+
+.MuiOutlinedInput-root:hover fieldset {
+  border-color: rgba(0, 255, 0, 0.7) !important;
 }
 
 .login-button {
-  margin-top: 15px !important;
-  font-weight: bold !important;
-  background-color: #1976d2 !important;
+  margin-top: 1rem;
+  background: #00ff99 !important;
+  color: #000 !important;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: #1565c0 !important;
-  transform: scale(1.03);
+  background: #00cc77 !important;
+  transform: scale(1.05);
 }
 
 .login-register {
-  margin-top: 15px;
-  color: #555;
+  margin-top: 1rem;
+  color: #00ff99;
 }
 
 .login-link {
-  color: #1976d2;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.login-link:hover {
+  color: #00ff99;
+  cursor: pointer;
   text-decoration: underline;
 }
 
-/* ✨ Animación */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.login-alert {
+  margin-top: 10px;
+}
+/* Efecto de escritura */
+.typing-text {
+  color: #00ff99;
+  font-family: "Courier New", monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #00ff99;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
-/* 📱 Responsivo */
-@media (max-width: 480px) {
-  .login-box {
-    padding: 25px;
-  }
+.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+  color: #00ff99;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 2px;
+}
 
-  .login-title {
-    font-size: 1.5rem !important;
-  }
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }

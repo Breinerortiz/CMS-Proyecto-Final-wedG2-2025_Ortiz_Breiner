@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -14,19 +14,31 @@ import {
   Alert,
   MenuItem,
 } from "@mui/material";
+import { motion } from "framer-motion";
 import "./LoginPages.css";
 
 const LoginPage = () => {
-  // Estado que controla si estamos en modo Login o Registro
   const [isRegister, setIsRegister] = useState(false);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("reportero");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  const [typedText, setTypedText] = useState(""); // texto animado
   const navigate = useNavigate();
+
+  const titleText = "Bienvenido al Diario Digital UDLA";
+
+  // Efecto typing
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setTypedText((prev) => prev + titleText.charAt(i));
+      i++;
+      if (i >= titleText.length) clearInterval(interval);
+    }, 70); // velocidad de escritura
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,12 +46,10 @@ const LoginPage = () => {
     setSuccess("");
 
     if (isRegister) {
-      // 🧾 REGISTRO
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Guardar usuario y rol en Firestore
         await setDoc(doc(db, "usuarios", user.uid), {
           email: user.email,
           rol: role,
@@ -47,54 +57,55 @@ const LoginPage = () => {
         });
 
         setSuccess("Usuario registrado correctamente 🎉");
-        setTimeout(() => setIsRegister(false), 2000); // cambia automáticamente a login
+        setTimeout(() => setIsRegister(false), 2000);
       } catch (err) {
-        console.error(err);
         setError("Error al registrar el usuario. Intenta con otro correo.");
       }
     } else {
-      // 🔐 LOGIN
-      // 🔐 LOGIN
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Buscar el rol del usuario en Firestore
         const docRef = doc(db, "usuarios", user.uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
           const rol = docSnap.data().rol;
-
-          // Redirigir según el rol
-          if (rol === "reportero") {
-            navigate("/reportero");
-          } else if (rol === "editor") {
-            navigate("/admin");
-          } else {
-            navigate("/");
-          }
+          if (rol === "reportero") navigate("/reportero");
+          else if (rol === "editor") navigate("/admin");
+          else navigate("/");
         } else {
           setError("No se encontró información del usuario.");
         }
       } catch (err) {
-        console.error(err);
         setError("Correo o contraseña incorrectos");
       }
-
     }
   };
 
   return (
-    <Box className="login-container">
-      <Box className="login-box">
+    <div className="login-bg">
+      <div className="matrix-overlay" />
+
+      <motion.div
+        className="login-box"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
         <img
           src="https://copilot.microsoft.com/th/id/BCO.b913fc13-abca-4c65-bea9-2fcd3bda9aa3.png"
           alt="Logo UDLA"
           className="login-logo"
         />
 
-        <Typography variant="h4" className="login-title">
+        {/* 👇 Texto con efecto typing */}
+        <Typography variant="h5" className="typing-text">
+          {typedText}
+          <span className="cursor">|</span>
+        </Typography>
+
+        <Typography variant="h6" className="login-title">
           {isRegister ? "Crear cuenta" : "Iniciar sesión"}
         </Typography>
 
@@ -107,6 +118,8 @@ const LoginPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            InputLabelProps={{ className: "login-label" }}
+            InputProps={{ className: "login-input" }}
           />
           <TextField
             label="Contraseña"
@@ -117,9 +130,10 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            InputLabelProps={{ className: "login-label" }}
+            InputProps={{ className: "login-input" }}
           />
 
-          {/* Solo mostrar el selector de rol si está registrando */}
           {isRegister && (
             <TextField
               select
@@ -129,6 +143,8 @@ const LoginPage = () => {
               fullWidth
               margin="normal"
               helperText="Selecciona el tipo de usuario"
+              InputLabelProps={{ className: "login-label" }}
+              SelectProps={{ className: "login-input" }}
             >
               <MenuItem value="reportero">Reportero</MenuItem>
               <MenuItem value="editor">Editor</MenuItem>
@@ -136,23 +152,17 @@ const LoginPage = () => {
           )}
 
           {error && (
-            <Alert severity="error" sx={{ mt: 1 }}>
+            <Alert severity="error" className="login-alert">
               {error}
             </Alert>
           )}
           {success && (
-            <Alert severity="success" sx={{ mt: 1 }}>
+            <Alert severity="success" className="login-alert">
               {success}
             </Alert>
           )}
 
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            className="login-button"
-          >
+          <Button type="submit" variant="contained" fullWidth className="login-button">
             {isRegister ? "Registrarme" : "Ingresar"}
           </Button>
 
@@ -160,28 +170,22 @@ const LoginPage = () => {
             {isRegister ? (
               <>
                 ¿Ya tienes cuenta?{" "}
-                <span
-                  className="login-link"
-                  onClick={() => setIsRegister(false)}
-                >
+                <span className="login-link" onClick={() => setIsRegister(false)}>
                   Inicia sesión
                 </span>
               </>
             ) : (
               <>
                 ¿No tienes cuenta?{" "}
-                <span
-                  className="login-link"
-                  onClick={() => setIsRegister(true)}
-                >
+                <span className="login-link" onClick={() => setIsRegister(true)}>
                   Regístrate aquí
                 </span>
               </>
             )}
           </Typography>
         </form>
-      </Box>
-    </Box>
+      </motion.div>
+    </div>
   );
 };
 

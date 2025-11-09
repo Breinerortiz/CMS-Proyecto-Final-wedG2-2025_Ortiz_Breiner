@@ -1,78 +1,87 @@
-/* 🎨 Estilos para la página principal del noticiero */
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #0a7cff;
-}
-.news-container {
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.news-title {
-  font-weight: bold !important;
-  color: #021116 !important;
-  margin-bottom: 10px !important;
-}
-
-.news-subtitle {
-  color: #2c2b2b !important;
-  margin-bottom: 30px !important;
-}
-
-.news-content {
+.main-matrix-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Permite crecer si el contenido lo requiere */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
+  justify-content: center;
+  overflow: visible; /* ✅ Permite que el footer sea visible */
 }
 
-.news-logo {
-  width: 350px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-  transition: transform 0.4s ease;
+/* 🎬 Fondo Matrix animado */
+.matrix-canvas {
+  position: fixed; /* ✅ Fijo al fondo de toda la ventana */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: -2; /* ✅ Detrás de todo */
 }
 
-.news-logo:hover {
-  transform: scale(1.05);
+/* 🖤 Capa oscura para mejorar contraste */
+.matrix-overlay {
+  position: fixed; /* ✅ También fija */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.95));
+  z-index: -1; /* ✅ Debajo del contenido pero encima del fondo */
 }
 
-.news-text {
-  max-width: 700px;
-  text-align: justify;
-  color: #242323;
+/* === Contenido === */
+.main-content {
+  position: relative;
+  z-index: 1; /* ✅ Por encima del fondo */
+  text-align: center;
+  color: #e0ffe0;
+  padding: 3rem 1rem 6rem; /* deja espacio inferior para el footer */
+}
+
+.content-box {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(0, 20, 0, 0.5);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.main-title {
+  color: #00ff99;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(0, 255, 100, 0.6);
+}
+
+.main-subtitle {
+  color: #bfffd0;
+  margin-bottom: 1.5rem;
+}
+
+.main-logo {
+  width: 180px;
+  margin: 1rem 0 1.5rem;
+  filter: drop-shadow(0 0 10px #00ff99);
+}
+
+.main-text {
+  color: #ccffcc;
+  margin-bottom: 2rem;
+  line-height: 1.6;
   font-size: 1.1rem;
-  line-height: 1.7;
 }
 
-.news-button {
-  margin-top: 30px !important;
-  font-weight: bold !important;
-  background-color: #1976d2 !important;
+.main-button {
+  background-color: #00ff99 !important;
+  color: #000 !important;
+  font-weight: bold;
   transition: all 0.3s ease;
 }
 
-.news-button:hover {
-  background-color: #1565c0 !important;
-  transform: scale(1.05);
-}
-
-/* 📱 Responsivo */
-@media (max-width: 768px) {
-  .news-container {
-    padding: 30px 10px;
-  }
-
-  .news-logo {
-    width: 180px;
-  }
-
-  .news-title {
-    font-size: 1.8rem !important;
-  }
-
-  .news-text {
-    font-size: 1rem;
-  }
+.main-button:hover {
+  background-color: #00cc77 !important;
+  box-shadow: 0 0 15px #00ff99;
 }

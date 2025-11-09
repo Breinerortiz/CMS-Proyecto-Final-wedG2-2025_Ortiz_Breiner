@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { db } from "../../Firebase/ConfigFirebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import "./News.css";
@@ -7,7 +7,43 @@ const News = () => {
   const [noticias, setNoticias] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todas");
   const [noticiaSeleccionada, setNoticiaSeleccionada] = useState(null);
+  const canvasRef = useRef(null);
 
+  // 🎬 Fondo tipo Matrix
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letras =
+      "アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const fontSize = 16;
+    const columnas = canvas.width / fontSize;
+    const gotas = Array.from({ length: columnas }).fill(1);
+
+    const dibujar = () => {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ff80";
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < gotas.length; i++) {
+        const texto = letras.charAt(Math.floor(Math.random() * letras.length));
+        ctx.fillText(texto, i * fontSize, gotas[i] * fontSize);
+        if (gotas[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          gotas[i] = 0;
+        }
+        gotas[i]++;
+      }
+    };
+
+    const interval = setInterval(dibujar, 33);
+    return () => clearInterval(interval);
+  }, []);
+
+  // 🔹 Cargar noticias publicadas
   useEffect(() => {
     const cargarNoticias = async () => {
       try {
@@ -25,7 +61,6 @@ const News = () => {
     cargarNoticias();
   }, []);
 
-  // 🔹 Categorías con íconos (puedes agregar más)
   const categorias = [
     { nombre: "Todas", icono: "🏠" },
     { nombre: "Tecnología", icono: "💻" },
@@ -34,30 +69,31 @@ const News = () => {
     { nombre: "Política", icono: "🏛️" },
   ];
 
-  // 🔸 Filtrar noticias
   const noticiasFiltradas =
     categoriaSeleccionada === "Todas"
       ? noticias
       : noticias.filter((n) => n.categoria === categoriaSeleccionada);
 
   return (
-    <div className="news-container">
-    {/* === Menú Animado === */}
-<div className={`menu ${noticiaSeleccionada ? "oculto" : ""}`}>
-  {categorias.map((cat) => (
-    <a
-      key={cat.nombre}
-      className={`link ${categoriaSeleccionada === cat.nombre ? "active" : ""}`}
-      onClick={() => setCategoriaSeleccionada(cat.nombre)}
-    >
-      <span className="link-icon">{cat.icono}</span>
-      <span className="link-title">{cat.nombre}</span>
-    </a>
-  ))}
-</div>
+    <div className="news-bg">
+      <canvas ref={canvasRef} className="matrix-canvas"></canvas>
 
-      {/* === Carrusel === */}
-      <div className="wrapper fadeIn">
+      {/* Menú de categorías */}
+      <div className={`menu ${noticiaSeleccionada ? "oculto" : ""}`}>
+        {categorias.map((cat) => (
+          <a
+            key={cat.nombre}
+            className={`link ${categoriaSeleccionada === cat.nombre ? "active" : ""}`}
+            onClick={() => setCategoriaSeleccionada(cat.nombre)}
+          >
+            <span className="link-icon">{cat.icono}</span>
+            <span className="link-title">{cat.nombre}</span>
+          </a>
+        ))}
+      </div>
+
+      {/* Carrusel 3D */}
+      <div className={`wrapper ${noticiaSeleccionada ? "blurred" : ""}`}>
         <div
           className="inner"
           style={{ "--quantity": noticiasFiltradas.length || 1 }}
@@ -68,16 +104,14 @@ const News = () => {
               className="card"
               style={{
                 "--index": index,
-                "--color-card": "142, 202, 252",
+                "--color-card": "0, 255, 100",
               }}
               onClick={() => setNoticiaSeleccionada(n)}
             >
               <div
                 className="img"
                 style={{
-                  backgroundImage: `url(${
-                    n.imagenUrl || "https://via.placeholder.com/400x300"
-                  })`,
+                  backgroundImage: `url(${n.imagenUrl || "https://via.placeholder.com/400x300"})`,
                 }}
               ></div>
 
@@ -91,45 +125,27 @@ const News = () => {
         </div>
       </div>
 
-      {/* === Modal Detalle === */}
+      {/* Modal */}
       {noticiaSeleccionada && (
-        <div
-          className="modal-overlay"
-          onClick={() => setNoticiaSeleccionada(null)}
-        >
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="close-btn"
-              onClick={() => setNoticiaSeleccionada(null)}
-            >
+        <div className="modal-overlay" onClick={() => setNoticiaSeleccionada(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setNoticiaSeleccionada(null)}>
               ✖
             </button>
 
             <img
-              src={
-                noticiaSeleccionada.imagenUrl ||
-                "https://via.placeholder.com/600x400"
-              }
+              src={noticiaSeleccionada.imagenUrl || "https://via.placeholder.com/600x400"}
               alt={noticiaSeleccionada.titulo}
               className="modal-img"
             />
 
             <h2 className="modal-title">{noticiaSeleccionada.titulo}</h2>
-
             {noticiaSeleccionada.subtitulo && (
-              <h4 className="modal-subtitle">
-                {noticiaSeleccionada.subtitulo}
-              </h4>
+              <h4 className="modal-subtitle">{noticiaSeleccionada.subtitulo}</h4>
             )}
 
             <div className="modal-body">
-              <p>
-                {noticiaSeleccionada.contenido ||
-                  "Sin contenido disponible."}
-              </p>
+              <p>{noticiaSeleccionada.contenido || "Sin contenido disponible."}</p>
             </div>
 
             <div className="modal-footer">

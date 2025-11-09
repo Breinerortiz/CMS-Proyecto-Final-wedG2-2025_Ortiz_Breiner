@@ -1,64 +1,26 @@
-/* 🎨 Estilos para el Header */
-
-.header-container {
-  background-color: #1976d2 !important;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-}
-
 .header-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 25px;
-}
-
-.header-logo-box {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+  background: transparent;
+  height: 70px;
+  padding: 0 2rem;
 }
 
 .header-logo {
-  width: 150px;
-  height: auto;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
+  height: 45px;
+  filter: drop-shadow(0 0 8px #00ff41);
 }
 
-.header-logo:hover {
-  transform: scale(1.08);
-}
-
-.header-title {
+.nav-btn {
+  color: #00ff41 !important;
   font-weight: bold !important;
-  color: rgb(0, 0, 0) !important;
+  text-transform: none !important;
+  margin-left: 10px !important;
+  transition: all 0.3s ease-in-out !important;
+  border-bottom: 2px solid transparent !important;
 }
 
-.header-button {
-  font-weight: bold !important;
-  background-color: #ffca28 !important;
-  color: #0d47a1 !important;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.header-button:hover {
-  background-color: #ffd740 !important;
+.nav-btn:hover {
+  color: #ffffff !important;
+  border-bottom: 2px solid #00ff41 !important;
+  text-shadow: 0 0 10px #00ff41;
   transform: scale(1.05);
-}
-
-/* 📱 Responsivo */
-@media (max-width: 768px) {
-  .header-toolbar {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-
-  .header-logo {
-    width: 50px;
-  }
-
-  .header-title {
-    font-size: 1.3rem !important;
-  }
 }
